@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection properties - Driver, URL, user, password -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/gatling2</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">123456</property>
+		
+		<!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<!-- Mapping with model class containing annotations -->
+		<mapping class="model.GerrorEntity"/>
+		<mapping class="model.GgroupEntity"/>
+		<mapping class="model.GrequestEntity"/>
+		<mapping class="model.GrunEntity"/>
+		<mapping class="model.GscenarioEntity"/>
+		<mapping class="model.MetricEntity"/>
+		<mapping class="model.MetricdataEntity"/>
+		<mapping class="model.MetricstoreparamEntity"/>
+		<mapping class="model.MetricstoretypeEntity"/>
+		<mapping class="model.PeriodEntity"/>
+		<mapping class="model.SourceEntity"/>
+		<mapping class="model.SourcetypeEntity"/>
+	</session-factory>
+</hibernate-configuration>

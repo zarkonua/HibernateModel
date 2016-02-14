@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <class>model.GerrorEntity</class>
+        <class>model.GgroupEntity</class>
+        <class>model.GrequestEntity</class>
+        <class>model.GrunEntity</class>
+        <class>model.GscenarioEntity</class>
+        <class>model.MetricEntity</class>
+        <class>model.MetricdataEntity</class>
+        <class>model.MetricstoreparamEntity</class>
+        <class>model.MetricstoretypeEntity</class>
+        <class>model.PeriodEntity</class>
+        <class>model.SourceEntity</class>
+        <class>model.SourcetypeEntity</class>
+        <properties>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gatling2"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.user" value="root"/>
+            <property name="eclipselink.jdbc.password" value="123456"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gatling2"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="123456"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/gatling2"/>
+            <property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="root"/>
+            <property name="openjpa.ConnectionPassword" value="123456"/>
+            <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gatling2"/>
+            <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="toplink.jdbc.user" value="root"/>
+            <property name="toplink.jdbc.password" value="123456"/>
+            <property name="hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>
