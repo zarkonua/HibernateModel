@@ -13,8 +13,8 @@ public class PeriodEntity {
     @Column(name = "ID", nullable = false, unique = true, length = 11)
     private int id;
     private Date start;
-    private Date end;
-    
+    private Date endDate;
+
     public int getId() {
         return id;
     }
@@ -34,13 +34,13 @@ public class PeriodEntity {
     }
 
     @Basic
-    @Column(name = "end")
-    public Date getEnd() {
-        return end;
+    @Column(name = "enddate")
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @Override
@@ -52,16 +52,15 @@ public class PeriodEntity {
 
         if (id != that.id) return false;
         if (start != null ? !start.equals(that.start) : that.start != null) return false;
-        if (end != null ? !end.equals(that.end) : that.end != null) return false;
+        return endDate != null ? endDate.equals(that.endDate) : that.endDate == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (start != null ? start.hashCode() : 0);
-        result = 31 * result + (end != null ? end.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         return result;
     }
 }

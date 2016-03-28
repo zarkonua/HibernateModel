@@ -1,8 +1,10 @@
+import drivers.Graphite;
 import model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Starter {
     public static void main(String[] args) {
@@ -45,7 +47,7 @@ public class Starter {
 
         PeriodEntity periodEntity = new PeriodEntity();
         periodEntity.setStart(new Date());
-        periodEntity.setEnd(new Date());
+        periodEntity.setEndDate(new Date());
 
         session.save(periodEntity);
 
@@ -61,16 +63,26 @@ public class Starter {
         System.out.println("MetricstoreparamEntity Table: " + "MetricstoreparamEntity ID=" + metricstoreparamEntity.getId() + " getPeriodId=" + metricstoreparamEntity.getPeriodId() + " getMetricStoreTypeId=" + metricstoreparamEntity.getMetricStoreTypeId());
 
         byte[] bytes = "".getBytes();
-        MetricdataEntity metricdataEntity = new MetricdataEntity();
-        metricdataEntity.setValueBin(bytes);
-        metricdataEntity.setValueDouble(1d);
-        metricdataEntity.setValueInt(2);
-        metricdataEntity.setValueString("value");
-        metricdataEntity.setMetricStoreParamId(metricstoreparamEntity.getId());
+//        MetricdataEntity metricdataEntity = new MetricdataEntity();
+//        metricdataEntity.setValueBin(bytes);
+        String url = "http://172.31.237.154/render/?width=586&height=308&_salt=1458919770.508&target=summarize(ubuntux-VirtualBox.cpu-0.cpu-idle,%20%221hour%22,%20%22avg%22)&from=00%3A00_20160327&until=23%3A59_20160328&format=json";
+        Graphite.Graphite graphite = new Graphite.Graphite();
+        Map<String, String> datapoints = graphite.getDatapoints(url);
+        for(Map.Entry<String, String> entry : datapoints.entrySet()){
+            MetricdataEntity newMetricdataEntity = new MetricdataEntity();
+            newMetricdataEntity.setValueDouble(Double.parseDouble(entry.getValue()));
+            newMetricdataEntity.setValueInt(Integer.parseInt(entry.getKey()));
+            newMetricdataEntity.setMetricStoreParamId(metricstoreparamEntity.getId());
+            session.save(newMetricdataEntity);
+        }
+//        metricdataEntity.setValueDouble(1d);
+//        metricdataEntity.setValueInt(2);
+//        metricdataEntity.setValueString("value");
+//        metricdataEntity.setMetricStoreParamId(metricstoreparamEntity.getId());
+//
+//        session.save(metricdataEntity);
 
-        session.save(metricdataEntity);
-
-        System.out.println("MetricdataEntity Table: " + "MetricdataEntity ID=" + metricdataEntity.getId() + " getMetricStoreParamId=" + metricdataEntity.getMetricStoreParamId());
+//        System.out.println("MetricdataEntity Table: " + "MetricdataEntity ID=" + metricdataEntity.getId() + " getMetricStoreParamId=" + metricdataEntity.getMetricStoreParamId());
 
         GrunEntity grunEntity = new GrunEntity();
         grunEntity.setSimulationId("simulation Id 1");
